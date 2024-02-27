@@ -2,16 +2,24 @@
 
 ## Helpful commands
 
+#### (Run in the terminal)
+
 ### To run the application:
 
 ```
 ./mvnw spring-boot:run
 ```
 
-### To run all the test:
+### To run all the tests:
 
 ```
 ./mvnw test
+```
+
+### To run all tests in a particular class:
+
+```
+./mvnw -Dtest=ChallengeServiceTest test
 ```
 
 ## Reference Documentation
