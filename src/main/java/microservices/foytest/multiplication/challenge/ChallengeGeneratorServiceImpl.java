@@ -10,6 +10,10 @@ public class ChallengeGeneratorServiceImpl implements ChallengeGeneratorService 
     ChallengeGeneratorServiceImpl() {
         this.random = new Random();
     }
+    protected ChallengeGeneratorServiceImpl(final Random random)
+    {
+        this.random = random;
+    }
     @Override
     public Challenge randomChallenge() {
         return null;
