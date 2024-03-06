@@ -9,6 +9,6 @@ public class ChallengeAttemptDTO {
     int factorA, factorB;
     @NotBlank
     String userAlias;
-    @Positive
+    @Positive(message = "The answer couldn't be negative.")
     int answer;
 }
