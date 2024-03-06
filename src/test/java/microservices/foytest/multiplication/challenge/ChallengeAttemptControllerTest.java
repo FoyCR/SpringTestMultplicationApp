@@ -83,7 +83,7 @@ public class ChallengeAttemptControllerTest {
 
         //when
         MockHttpServletResponse response = mvc.perform(
-                        post("/attempt")
+                        post("/attempts")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(jsonRequestAttempt.write(attemptDTO).getJson()))
                 .andReturn().getResponse();
