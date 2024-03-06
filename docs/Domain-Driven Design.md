@@ -30,3 +30,23 @@ At a code level will be created a packages for **Domains** and classes for entit
 - microservices.foytest.multiplication.challenge
     - Challenge.java
     - ChallengeAttempt.java
+
+### About the presentation layer
+
+The presentation layer for this first story will be a REST API. So we will need:
+
+- An endpoint to get a random-medium complexity multiplication.
+- An endpoint to send the answer for a given multiplication.
+
+So are the design of our endpoints using REST will be
+
+- **GET** */challenges/random/* will return a randomly generated challenge.
+- **POST** */attempts/* will be the endpoint to send and attempt to solve a challenge.
+
+At code level
+
+- microservices.foytest.multiplication.challenge
+    - ChallengeController
+        - ramdom (get method)
+    - ChallengeAttemptController
+        - attempt (post method)
