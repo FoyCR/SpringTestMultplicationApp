@@ -22,6 +22,22 @@
 ./mvnw -Dtest=ChallengeServiceTest test
 ```
 
+## Testing using HTTPie
+
+Make sure the application is running.
+
+### Get random challenge
+
+```
+http -b :8080/challenges/random
+```
+
+### Post attempt to solve a challenge
+
+```
+ http POST :8080/attempts factorA=58 factorB=92 userAlias=foy answer=5400
+```
+
 ## Reference Documentation
 
 For further reference, please consider the following sections:
