@@ -11,7 +11,7 @@ class ApiClient {
         return fetch(`${ApiClient.SERVER_URL}${ApiClient.POST_ATTEMPT}`, //Posting the attempt to tne endpoint
         {
             method:'POST',
-            headers: {'Content-Type':'application/josn'},
+            headers: {'Content-Type':'application/json'},
             body: JSON.stringify(
                 {
                     userAlias: user,
