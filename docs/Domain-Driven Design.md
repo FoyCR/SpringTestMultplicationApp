@@ -50,3 +50,16 @@ At code level
         - ramdom (get method)
     - ChallengeAttemptController
         - attempt (post method)
+
+---
+
+## User story 2
+
+For the second user story we keep the same domains an entities, but we are going to add the data layer in order to store
+the attempts data.
+To achieve this, we made the following decisions:
+
+- Use H2 database because is simple and small, it can be embedded within your application.
+- Use Hibernate as ORM to map the Java objects to SQL records.
+- Use the JPA (Java persistence API) instead of native API in Hibernate to map the objects to database records.
+- 
