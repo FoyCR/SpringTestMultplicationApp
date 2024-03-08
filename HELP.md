@@ -38,6 +38,20 @@ http -b :8080/challenges/random
  http POST :8080/attempts factorA=58 factorB=92 userAlias=foy answer=5400
 ```
 
+## H2 Database web console
+
+if the configuration in application.properties is in place you can access it through:
+
+```
+http://localhost:8080/h2-console
+```
+
+use the following as JDBC URL
+
+```
+jdbc:h2:mem:testdb
+```
+
 ## Reference Documentation
 
 For further reference, please consider the following sections:
