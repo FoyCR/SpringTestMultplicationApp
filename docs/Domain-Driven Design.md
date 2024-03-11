@@ -62,4 +62,9 @@ To achieve this, we made the following decisions:
 - Use H2 database because is simple and small, it can be embedded within your application.
 - Use Hibernate as ORM to map the Java objects to SQL records.
 - Use the JPA (Java persistence API) instead of native API in Hibernate to map the objects to database records.
-- 
+
+### Entities
+
+We will reuse the domain classes as Entities for the data layer using son JPA annotations, this decision is because we
+want to keep the code simple. In a real scenario we could create new classes for the data layer and use mappers.
+
