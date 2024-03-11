@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
@@ -84,5 +85,21 @@ public class ChallengeServiceTest {
         verify(userRepository, never()).save(any());
         verify(attemptRepository).save(resultAttempt);
 
+    }
+
+    @Test
+    public void retrieveAttemptsTest() {
+        //given
+        User user = new User("Foy");
+        ChallengeAttempt attempt1 = new ChallengeAttempt(1L, user, 50, 60, 5000, false);
+        ChallengeAttempt attempt2 = new ChallengeAttempt(2L, user, 50, 60, 3000, true);
+        List<ChallengeAttempt> lastAttempts = List.of(attempt1, attempt2);
+        given(attemptRepository.findTop10ByUserAliasOrderByIdDesc("Foy")).willReturn(lastAttempts);
+
+        //when
+        List<ChallengeAttempt> lastAttemptsResult = challengeService.getAttemptsForUser("Foy");
+
+        //then
+        then(lastAttemptsResult).isEqualTo(lastAttempts);
     }
 }
