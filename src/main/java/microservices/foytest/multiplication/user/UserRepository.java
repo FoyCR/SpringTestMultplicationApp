@@ -1,6 +1,5 @@
 package microservices.foytest.multiplication.user;
 
-import org.apache.catalina.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

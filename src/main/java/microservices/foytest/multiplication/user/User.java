@@ -11,13 +11,13 @@ import lombok.*;
 @Data //This annotation groups equals and hashCode methods, toString, getters, and setters
 @AllArgsConstructor
 @NoArgsConstructor //PA and Hibernate also require your entities to have a default, empty constructor
-public class Users {
+public class User {
     @Id   //id row in the database
     @GeneratedValue //auto generate value for the database
     private Long id;
     private String alias;
 
-    public Users(final String userAlias) {
+    public User(final String userAlias) {
         this(null, userAlias);
     }
 }

@@ -3,7 +3,7 @@ package microservices.foytest.multiplication.challenge;
 import lombok.*;
 import microservices.foytest.multiplication.user.User;
 import jakarta.persistence.*;
-import microservices.foytest.multiplication.user.Users;
+
 
 /**
  * Identifies the attempt from a {@link User} to solve a Challenge
@@ -25,7 +25,7 @@ public class ChallengeAttempt {
     @JoinColumn(name = "USER_ID") //This annotation makes Hibernate link both tables with a join column, It will create
     // a new column in the CHALLENGE_ATTEMPT table called USER_ID which will store the reference to the ID record of the
     // corresponding user in the USER table.
-    private Users users; //embedded entity type: users
+    private User user; //embedded entity type: users
 
     private int factorA;
     private int factorB;
