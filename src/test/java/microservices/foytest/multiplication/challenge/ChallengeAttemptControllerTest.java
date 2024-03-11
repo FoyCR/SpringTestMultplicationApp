@@ -40,7 +40,7 @@ public class ChallengeAttemptControllerTest {
         User user = new User(1L, "Foy");
         long attemptId = 1L;
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 70, "Foy", 3500);
-        ChallengeAttempt expectedResponse = new ChallengeAttempt(attemptId, user.getId(), 50, 70, 3500, true);
+        ChallengeAttempt expectedResponse = new ChallengeAttempt(attemptId, user, 50, 70, 3500, true);
         given(challengeService.verifyAttempt(eq(attemptDTO))).willReturn(expectedResponse);
 
         //When
@@ -61,7 +61,7 @@ public class ChallengeAttemptControllerTest {
         User user = new User(1L, "Foy");
         long attemptId = 1L;
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 70, "Foy", 5500);
-        ChallengeAttempt expectedResponse = new ChallengeAttempt(attemptId, user.getId(), 50, 70, 5500, false);
+        ChallengeAttempt expectedResponse = new ChallengeAttempt(attemptId, user, 50, 70, 5500, false);
         given(challengeService.verifyAttempt(eq(attemptDTO))).willReturn(expectedResponse);
 
         //When

@@ -9,5 +9,5 @@ import java.util.Optional;
 // the desired behavior
 public interface UserRepository extends CrudRepository<User, Long> {
     // Return a user wrapped in a Java Optional<T>
-    Optional<User> finByAlias(final String alias);
+    Optional<User> findByAlias(final String alias);
 }

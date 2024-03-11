@@ -70,7 +70,7 @@ public class ChallengeServiceTest {
     @Test
     public void checkExistingUserTest() {
         User existingUser = new User(1L, "Foy");
-        given(userRepository.finByAlias("Foy")).willReturn(Optional.of(existingUser));
+        given(userRepository.findByAlias("Foy")).willReturn(Optional.of(existingUser));
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "Foy", 5000);
 
         //when

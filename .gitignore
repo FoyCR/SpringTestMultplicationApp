@@ -141,3 +141,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/qodana.yaml
