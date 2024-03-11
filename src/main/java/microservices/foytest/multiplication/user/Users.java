@@ -1,0 +1,23 @@
+package microservices.foytest.multiplication.user;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+/**
+ * This class represents and identifies the user
+ * It uses lombok to produce all the boilerplate required via annotations
+ */
+@Entity //mark this class as an object to be mapped to a database record
+@Data //This annotation groups equals and hashCode methods, toString, getters, and setters
+@AllArgsConstructor
+@NoArgsConstructor //PA and Hibernate also require your entities to have a default, empty constructor
+public class Users {
+    @Id   //id row in the database
+    @GeneratedValue //auto generate value for the database
+    private Long id;
+    private String alias;
+
+    public Users(final String userAlias) {
+        this(null, userAlias);
+    }
+}
