@@ -8,11 +8,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 import static org.assertj.core.api.BDDAssertions.then;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -62,5 +65,24 @@ public class ChallengeServiceTest {
         //check for saving attempts
         verify(userRepository).save(new User("Foy"));
         verify(attemptRepository).save(resultAttempt);
+    }
+
+    @Test
+    public void checkExistingUserTest() {
+        User existingUser = new User(1L, "Foy");
+        given(userRepository.finByAlias("Foy")).willReturn(Optional.of(existingUser));
+        ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "Foy", 5000);
+
+        //when
+        ChallengeAttempt resultAttempt = challengeService.verifyAttempt(attemptDTO);
+
+        //Then
+        then(resultAttempt.isCorrect()).isFalse();
+
+        //check for saving attempts
+        then(resultAttempt.getUser()).isEqualTo(existingUser);
+        verify(userRepository, never()).save(any());
+        verify(attemptRepository).save(resultAttempt);
+
     }
 }
