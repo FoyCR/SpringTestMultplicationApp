@@ -14,8 +14,11 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.List;
+
 import static org.mockito.BDDMockito.given;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.assertj.core.api.BDDAssertions.then;
 
@@ -33,6 +36,9 @@ public class ChallengeAttemptControllerTest {
     private JacksonTester<ChallengeAttemptDTO> jsonRequestAttempt;
     @Autowired
     private JacksonTester<ChallengeAttempt> jsonResultAttempt;
+
+    @Autowired
+    private JacksonTester<List<ChallengeAttempt>> jsonAttemptList;
 
     @Test
     void postRightAnswer() throws Exception {
@@ -90,5 +96,25 @@ public class ChallengeAttemptControllerTest {
 
         //then
         then(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    void getAttemptsForUser() throws Exception {
+        //Given a valid Alias
+        User user = new User(1L, "Foy");
+        ChallengeAttempt attempt1 = new ChallengeAttempt(1L, user, 20, 30, 5000, true);
+        ChallengeAttempt attempt2 = new ChallengeAttempt(1L, user, 20, 30, 5000, true);
+        List<ChallengeAttempt> expectedAttemptList = List.of(attempt1, attempt2);
+        given(challengeService.getAttemptsForUser(user.getAlias())).willReturn(expectedAttemptList);
+
+        //when
+        MockHttpServletResponse response = mvc.perform(
+                get("/attempts?alias=Foy")).andReturn().getResponse();
+
+        //then
+        then(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        then(response.getContentAsString()).isEqualTo(
+                jsonAttemptList.write(expectedAttemptList)
+                        .getJson());
     }
 }
