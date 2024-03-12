@@ -7,7 +7,7 @@ import lombok.*;
  * This class represents and identifies the user
  * It uses lombok to produce all the boilerplate required via annotations
  */
-@Entity //mark this class as an object to be mapped to a database record
+@Entity(name = "users") //mark this class as an object to be mapped to a database table called user
 @Data //This annotation groups equals and hashCode methods, toString, getters, and setters
 @AllArgsConstructor
 @NoArgsConstructor //PA and Hibernate also require your entities to have a default, empty constructor
