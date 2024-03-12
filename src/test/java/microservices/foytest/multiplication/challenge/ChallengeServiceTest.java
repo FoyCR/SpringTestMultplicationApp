@@ -32,14 +32,13 @@ public class ChallengeServiceTest {
     @BeforeEach
     public void setUp() {
         challengeService = new ChallengeServiceImpl(userRepository, attemptRepository);
-
-        given(attemptRepository.save(any())).will(returnsFirstArg());
     }
 
     @Test
     public void checkCorrectAttemptTest() {
         // given
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "Foy", 3000);
+        given(attemptRepository.save(any())).will(returnsFirstArg());
 
         // when
         ChallengeAttempt resultAttempt = challengeService.verifyAttempt(attemptDTO);
@@ -56,6 +55,7 @@ public class ChallengeServiceTest {
     public void checkWrongAttemptTest() {
         // given
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "Foy", 5000);
+        given(attemptRepository.save(any())).will(returnsFirstArg());
 
         //when
         ChallengeAttempt resultAttempt = challengeService.verifyAttempt(attemptDTO);
@@ -72,6 +72,7 @@ public class ChallengeServiceTest {
     public void checkExistingUserTest() {
         User existingUser = new User(1L, "Foy");
         given(userRepository.findByAlias("Foy")).willReturn(Optional.of(existingUser));
+        given(attemptRepository.save(any())).will(returnsFirstArg());
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "Foy", 5000);
 
         //when
