@@ -6,6 +6,8 @@ import microservices.foytest.multiplication.user.User;
 import microservices.foytest.multiplication.user.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @Service
@@ -35,5 +37,10 @@ public class ChallengeServiceImpl implements ChallengeService {
                 isCorrect);
         ChallengeAttempt storedAttempt = attemptRepository.save(verifiedAttempt);
         return storedAttempt;
+    }
+
+    @Override
+    public List<ChallengeAttempt> getAttemptsForUser(String userAlias) {
+        return attemptRepository.findTop10ByUserAliasOrderByIdDesc(userAlias);
     }
 }
