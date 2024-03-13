@@ -16,7 +16,7 @@ class ListAttemptsComponent extends React.Component {
                         <tr key={a.id} 
                             style={{color: a.correct? 'green': 'red'}}>
                                 <td>{a.factorA} X {a.factorB}</td>
-                                <td>{a.answer}</td>
+                                <td>{a.answerAttempt}</td>
                                 <td>{a.correct ? "Correct": (`Incorrect (${a.factorA*a.factorB})`)}</td>
                             </tr>
                         )}
