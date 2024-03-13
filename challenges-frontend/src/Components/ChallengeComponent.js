@@ -1,5 +1,5 @@
 import * as React from "react";
-import ApiClient  from "./ApiClient";
+import ApiClient  from "../services/ApiClient";
 
 class ChallengeComponent extends React.Component {
     constructor(props) {
