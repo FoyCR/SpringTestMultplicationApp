@@ -43,7 +43,7 @@ So are the design of our endpoints using REST will be
 - **GET** */challenges/random/* will return a randomly generated challenge.
 - **POST** */attempts/* will be the endpoint to send and attempt to solve a challenge.
 
-At code level
+At API code level
 
 - microservices.foytest.multiplication.challenge
     - ChallengeController
@@ -67,4 +67,38 @@ To achieve this, we made the following decisions:
 
 We will reuse the domain classes as Entities for the data layer using son JPA annotations, this decision is because we
 want to keep the code simple. In a real scenario we could create new classes for the data layer and use mappers.
+
+A new method in the ChallengeAttempt controller will be implemented to return the latest attempts by user.
+
+API Code structure updated:
+
+- microservices.foytest.multiplication.challenge
+    - ChallengeController
+        - ramdom (get method)
+    - ChallengeAttemptController
+        - attempt (post method)
+        - attempts (get last attempts)
+
+---
+
+## User story 3
+
+With this new story, some microservices things can be practiced.
+Once the desired **gamification** aspects have been identified (points, leaderboard, badges), we group them into their
+specific domain. This *gamification* domain will become a new microservice within our application.
+
+### Design considerations
+
+The reasoning behind this decision is as follows:
+
+- The *Users* and *Challenge* domains are the core of the application. They need high availability, and maybe it will
+  need to scale up if the user base increase. As long as the users are able to solve the challenges, the "business" can
+  go on.
+- For the *Gamification* domain we can accept that it performs slower, and even it can be stop working for some time.
+- Considering the above we can benefit from having independently deployable units (microservices) in this scenario
+
+To create the new Microservice we need to create a new Spring boot application to ensure that it wil be an independent
+deployable unit.
+The current Multiplication Service needs to be able to send the attempts to the new Gamification services which assigned
+points, assigned badges and update the leaderboard.
 
