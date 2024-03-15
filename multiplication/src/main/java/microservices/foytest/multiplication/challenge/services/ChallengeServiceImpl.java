@@ -1,7 +1,10 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import microservices.foytest.multiplication.challenge.dto.ChallengeAttemptDTO;
+import microservices.foytest.multiplication.challenge.data.ChallengeAttemptRepository;
+import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
 import microservices.foytest.multiplication.user.User;
 import microservices.foytest.multiplication.user.UserRepository;
 import org.springframework.stereotype.Service;

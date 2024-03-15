@@ -1,5 +1,8 @@
 package microservices.foytest.multiplication.challenge;
 
+import microservices.foytest.multiplication.challenge.domain.Challenge;
+import microservices.foytest.multiplication.challenge.services.ChallengeGeneratorService;
+import microservices.foytest.multiplication.challenge.services.ChallengeGeneratorServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

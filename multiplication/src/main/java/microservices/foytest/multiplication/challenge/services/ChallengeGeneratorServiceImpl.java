@@ -1,5 +1,6 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.services;
 
+import microservices.foytest.multiplication.challenge.domain.Challenge;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -15,7 +16,7 @@ public class ChallengeGeneratorServiceImpl implements ChallengeGeneratorService 
         this.random = new Random();
     }
 
-    protected ChallengeGeneratorServiceImpl(final Random random) {
+    public ChallengeGeneratorServiceImpl(final Random random) {
         this.random = random;
     }
 

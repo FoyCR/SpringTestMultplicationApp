@@ -1,4 +1,4 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.dto;
 
 import lombok.Value;
 import jakarta.validation.constraints.*;

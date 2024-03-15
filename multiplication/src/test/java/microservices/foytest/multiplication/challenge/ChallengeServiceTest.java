@@ -1,5 +1,10 @@
 package microservices.foytest.multiplication.challenge;
 
+import microservices.foytest.multiplication.challenge.data.ChallengeAttemptRepository;
+import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
+import microservices.foytest.multiplication.challenge.dto.ChallengeAttemptDTO;
+import microservices.foytest.multiplication.challenge.services.ChallengeService;
+import microservices.foytest.multiplication.challenge.services.ChallengeServiceImpl;
 import microservices.foytest.multiplication.user.User;
 import microservices.foytest.multiplication.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;

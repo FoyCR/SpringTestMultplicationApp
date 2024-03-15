@@ -1,4 +1,4 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.domain;
 
 import lombok.*;
 import microservices.foytest.multiplication.user.User;

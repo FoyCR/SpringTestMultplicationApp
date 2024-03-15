@@ -1,4 +1,6 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.services;
+
+import microservices.foytest.multiplication.challenge.domain.Challenge;
 
 public interface ChallengeGeneratorService {
     /**

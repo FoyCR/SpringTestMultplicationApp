@@ -1,5 +1,6 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.data;
 
+import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

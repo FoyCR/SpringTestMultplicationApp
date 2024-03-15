@@ -1,7 +1,9 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.controllers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import microservices.foytest.multiplication.challenge.domain.Challenge;
+import microservices.foytest.multiplication.challenge.services.ChallengeGeneratorService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

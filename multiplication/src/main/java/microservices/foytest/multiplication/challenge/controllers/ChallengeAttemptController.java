@@ -1,8 +1,11 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import microservices.foytest.multiplication.challenge.dto.ChallengeAttemptDTO;
+import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
+import microservices.foytest.multiplication.challenge.services.ChallengeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

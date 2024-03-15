@@ -1,4 +1,7 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.services;
+
+import microservices.foytest.multiplication.challenge.dto.ChallengeAttemptDTO;
+import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
 
 import java.util.List;
 
