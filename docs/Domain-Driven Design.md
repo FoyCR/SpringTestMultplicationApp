@@ -4,21 +4,21 @@
 
 for the first user story. Let's identify and define the business entities:
 
-- *Challenge*: Contains the two factors of a multiplication challenge.
-- *User*: Identifies the person who will try to solve a *Challenge*.
-- *Challenge attempt*: Represents the attempt from a *User* to solve the operation from a *Challenge*.
+- _Challenge_: Contains the two factors of a multiplication challenge.
+- _User_: Identifies the person who will try to solve a _Challenge_.
+- _Challenge attempt_: Represents the attempt from a _User_ to solve the operation from a _Challenge_.
 
 **Domains**:
 
-The *User* entity will be in the **User Domain** and the *Challenge* and *Challenge Attempt* entities will be in the *
-*Challenges Domain**.
+The _User_ entity will be in the **User Domain** and the _Challenge_ and _Challenge Attempt_ entities will be in the \*
+\*Challenges Domain\*\*.
 
 The relationships between the objects are as follows:
 
-- *User* and *Challenge* are independent entities. They don't keep any references.
-- *Challenge Attempt* are always for a given *User* and a given *Challenge*.
+- _User_ and _Challenge_ are independent entities. They don't keep any references.
+- _Challenge Attempt_ are always for a given _User_ and a given _Challenge_.
 
-There could be many *Attempts* for the same *Challenge*. Also, the same *User* may create many *Attempts* since they can
+There could be many _Attempts_ for the same _Challenge_. Also, the same _User_ may create many _Attempts_ since they can
 use the web app as many times as they want.
 
 **Code**:
@@ -26,10 +26,10 @@ use the web app as many times as they want.
 At a code level will be created a packages for **Domains** and classes for entities:
 
 - microservices.foytest.multiplication.user
-    - User.java
+  - User.java
 - microservices.foytest.multiplication.challenge
-    - Challenge.java
-    - ChallengeAttempt.java
+  - Challenge.java
+  - ChallengeAttempt.java
 
 ### About the presentation layer
 
@@ -40,16 +40,16 @@ The presentation layer for this first story will be a REST API. So we will need:
 
 So are the design of our endpoints using REST will be
 
-- **GET** */challenges/random/* will return a randomly generated challenge.
-- **POST** */attempts/* will be the endpoint to send and attempt to solve a challenge.
+- **GET** _/challenges/random/_ will return a randomly generated challenge.
+- **POST** _/attempts/_ will be the endpoint to send and attempt to solve a challenge.
 
 At API code level
 
 - microservices.foytest.multiplication.challenge
-    - ChallengeController
-        - ramdom (get method)
-    - ChallengeAttemptController
-        - attempt (post method)
+  - ChallengeController
+    - ramdom (get method)
+  - ChallengeAttemptController
+    - attempt (post method)
 
 ---
 
@@ -73,11 +73,11 @@ A new method in the ChallengeAttempt controller will be implemented to return th
 API Code structure updated:
 
 - microservices.foytest.multiplication.challenge
-    - ChallengeController
-        - ramdom (get method)
-    - ChallengeAttemptController
-        - attempt (post method)
-        - attempts (get last attempts)
+  - ChallengeController
+    - ramdom (get method)
+  - ChallengeAttemptController
+    - attempt (post method)
+    - attempts (get last attempts)
 
 ---
 
@@ -85,16 +85,16 @@ API Code structure updated:
 
 With this new story, some microservices things can be practiced.
 Once the desired **gamification** aspects have been identified (points, leaderboard, badges), we group them into their
-specific domain. This *gamification* domain will become a new microservice within our application.
+specific domain. This _gamification_ domain will become a new microservice within our application.
 
 ### Design considerations
 
 The reasoning behind this decision is as follows:
 
-- The *Users* and *Challenge* domains are the core of the application. They need high availability, and maybe it will
+- The _Users_ and _Challenge_ domains are the core of the application. They need high availability, and maybe it will
   need to scale up if the user base increase. As long as the users are able to solve the challenges, the "business" can
   go on.
-- For the *Gamification* domain we can accept that it performs slower, and even it can be stop working for some time.
+- For the _Gamification_ domain we can accept that it performs slower, and even it can be stop working for some time.
 - Considering the above we can benefit from having independently deployable units (microservices) in this scenario
 
 To create the new Microservice we need to create a new Spring boot application to ensure that it wil be an independent
@@ -102,3 +102,10 @@ deployable unit.
 The current Multiplication Service needs to be able to send the attempts to the new Gamification services which assigned
 points, assigned badges and update the leaderboard.
 
+### Entities
+
+In the new _Gamification_ domain we will add the following entities:
+
+- **Leaderboard Position**: with a relation 1 to 1 with user.
+- **Badge Card**: with a relation N to one with user (an User can have "n" badges)
+- **Score Card**: with a relation 1 to N with user (an User can have "n" score cards) and with a relation 1 to 1 with attempt.
