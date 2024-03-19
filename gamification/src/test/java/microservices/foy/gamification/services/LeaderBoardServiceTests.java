@@ -40,7 +40,7 @@ public class LeaderBoardServiceTests {
         LeaderBoardRow scoreRow = new LeaderBoardRow(userId, 300L, List.of());
         List<LeaderBoardRow> expectedLeaderBoard = List.of(
                 new LeaderBoardRow(userId, 300L, List.of(BadgeType.FIRST_RIGHT.getDescription())));
-        given(scoreRepository.first10Scores()).willReturn(List.of(scoreRow));
+        given(scoreRepository.findFirst10Scores()).willReturn(List.of(scoreRow));
         given(badgeRepository.findByUserIdOrderByBadgeTimestampDesc(userId)).willReturn(List.of(badgeCard));
 
         //When

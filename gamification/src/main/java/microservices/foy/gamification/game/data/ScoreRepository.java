@@ -1,5 +1,6 @@
 package microservices.foy.gamification.game.data;
 
+import microservices.foy.gamification.game.domain.LeaderBoardRow;
 import microservices.foy.gamification.game.domain.ScoreCard;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,7 +19,21 @@ public interface ScoreRepository extends CrudRepository<ScoreCard, Long> {
     @Query("SELECT SUM(s.score) FROM ScoreCard s WHERE s.userId= :userId GROUP BY s.userId")
     Optional<Integer> getTotalScoreForUser(@Param("userId") Long userId);
 
+    /**
+     * Find all the scores for a given user id order by timestamp
+     *
+     * @param userId the id of the user
+     * @return all the scorecard for a given user
+     */
     List<ScoreCard> findByUserIdOrderByScoreTimestampDesc(final Long userId);
 
+    /**
+     * Retrieve a list of {@link LeaderBoardRow} representing the leader board
+     *
+     * @return the leader board sorted by highest score first
+     */
+    @Query("SELECT NEW microservices.foy.gamification.game.domain.LeaderBoardRow(s.userId, SUM(s.score)) " +
+            "FROM ScoreCard s GROUP BY s.userId ORDER BY SUM(s.score) DESC")
+    List<LeaderBoardRow> findFirst10Scores();
 
 }
