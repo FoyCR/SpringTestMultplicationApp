@@ -6,6 +6,7 @@ import microservices.foy.gamification.game.domain.BadgeCard;
 import microservices.foy.gamification.game.domain.BadgeType;
 import microservices.foy.gamification.game.domain.LeaderBoardRow;
 import microservices.foy.gamification.game.services.LeaderBoardService;
+import microservices.foy.gamification.game.services.LeaderBoardServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
