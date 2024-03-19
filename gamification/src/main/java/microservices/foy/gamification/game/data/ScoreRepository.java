@@ -32,6 +32,7 @@ public interface ScoreRepository extends CrudRepository<ScoreCard, Long> {
      *
      * @return the leader board sorted by highest score first
      */
+    // This uses JPQL JPA Query Language to uses aggregates and to use NEW and java classes in the query
     @Query("SELECT NEW microservices.foy.gamification.game.domain.LeaderBoardRow(s.userId, SUM(s.score)) " +
             "FROM ScoreCard s GROUP BY s.userId ORDER BY SUM(s.score) DESC")
     List<LeaderBoardRow> findFirst10Scores();
