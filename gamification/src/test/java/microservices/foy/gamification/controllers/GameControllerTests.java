@@ -1,6 +1,7 @@
 package microservices.foy.gamification.controllers;
 
 import microservices.foy.gamification.challenge.dto.VerifiedAttemptDTO;
+import microservices.foy.gamification.game.controllers.GameController;
 import microservices.foy.gamification.game.services.GameService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

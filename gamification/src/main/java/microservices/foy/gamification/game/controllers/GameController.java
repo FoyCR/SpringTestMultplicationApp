@@ -1,4 +1,4 @@
-package microservices.foy.gamification.controllers;
+package microservices.foy.gamification.game.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
