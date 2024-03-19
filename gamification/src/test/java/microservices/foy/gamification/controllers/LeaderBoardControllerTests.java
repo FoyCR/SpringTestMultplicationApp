@@ -1,5 +1,6 @@
 package microservices.foy.gamification.controllers;
 
+import microservices.foy.gamification.game.controllers.LeaderBoardController;
 import microservices.foy.gamification.game.domain.LeaderBoardRow;
 import microservices.foy.gamification.game.services.LeaderBoardService;
 import org.junit.jupiter.api.Test;
@@ -28,16 +29,16 @@ public class LeaderBoardControllerTests {
     @Autowired
     private MockMvc mvc;
 
-    MockBean
+    @MockBean
     private LeaderBoardService leaderBoardService;
 
     @Autowired
     private JacksonTester<List<LeaderBoardRow>> jsonLeaderBoard;
 
     @Test
-    public void shouldReturnLeaderBoard () throws Exception {
+    public void shouldReturnLeaderBoard() throws Exception {
         //given
-        LeaderBoardRow row1= new LeaderBoardRow(1L, 300L);
+        LeaderBoardRow row1 = new LeaderBoardRow(1L, 300L);
         LeaderBoardRow row2 = new LeaderBoardRow(2L, 200L);
         List<LeaderBoardRow> leaderBoard = new ArrayList<>();
         Collections.addAll(leaderBoard, row1, row2);
@@ -45,8 +46,8 @@ public class LeaderBoardControllerTests {
 
         //when
         MockHttpServletResponse response = mvc.perform(
-                get("/leaders")
-                        .accept(MediaType.APPLICATION_JSON))
+                        get("/leaders")
+                                .accept(MediaType.APPLICATION_JSON))
                 .andReturn().getResponse();
 
         //then
