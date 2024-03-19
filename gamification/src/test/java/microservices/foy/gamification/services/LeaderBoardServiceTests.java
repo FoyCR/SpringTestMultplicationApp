@@ -5,7 +5,7 @@ import microservices.foy.gamification.game.data.ScoreRepository;
 import microservices.foy.gamification.game.domain.BadgeCard;
 import microservices.foy.gamification.game.domain.BadgeType;
 import microservices.foy.gamification.game.domain.LeaderBoardRow;
-import org.assertj.core.api.ListAssert;
+import microservices.foy.gamification.game.services.LeaderBoardService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
