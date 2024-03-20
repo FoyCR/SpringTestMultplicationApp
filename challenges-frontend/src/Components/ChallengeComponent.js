@@ -1,5 +1,5 @@
 import * as React from "react";
-import ApiClient  from "../services/ApiClient";
+import ChallengeApiClient  from "../services/ChallengeApiClient";
 import ListAttemptsComponent from "./ListAttemptsComponent";
 
 class ChallengeComponent extends React.Component {
@@ -23,7 +23,7 @@ class ChallengeComponent extends React.Component {
         this.refreshChallenge();
     }
     refreshChallenge(){
-        ApiClient.challenge().then (
+        ChallengeApiClient.challenge().then (
             res => {
                 if (res.ok) {
                     res.json().then (
@@ -49,7 +49,7 @@ class ChallengeComponent extends React.Component {
 
     handleSubmitAttempt (event) {
         event.preventDefault();
-        ApiClient.sendAttempt(
+        ChallengeApiClient.sendAttempt(
             this.state.user,
             this.state.a,
             this.state.b,
@@ -79,7 +79,7 @@ class ChallengeComponent extends React.Component {
     }
 
     updateLastAttempts(userAlias: string) {
-        ApiClient.getAttempts(userAlias).then(res => {
+        ChallengeApiClient.getAttempts(userAlias).then(res => {
             if (res.ok) {
                 let attempts: Attempt[] = [];
                 res.json().then(data => {
