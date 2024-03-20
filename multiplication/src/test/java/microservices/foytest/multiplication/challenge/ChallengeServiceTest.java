@@ -5,6 +5,7 @@ import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
 import microservices.foytest.multiplication.challenge.dto.ChallengeAttemptDTO;
 import microservices.foytest.multiplication.challenge.services.ChallengeService;
 import microservices.foytest.multiplication.challenge.services.ChallengeServiceImpl;
+import microservices.foytest.multiplication.clients.GamificationServiceClient;
 import microservices.foytest.multiplication.user.data.User;
 import microservices.foytest.multiplication.user.data.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,9 +35,12 @@ public class ChallengeServiceTest {
     @Mock
     private ChallengeAttemptRepository attemptRepository;
 
+    @Mock
+    private GamificationServiceClient gameClient;
+
     @BeforeEach
     public void setUp() {
-        challengeService = new ChallengeServiceImpl(userRepository, attemptRepository);
+        challengeService = new ChallengeServiceImpl(userRepository, attemptRepository, gameClient);
     }
 
     @Test
@@ -44,6 +48,7 @@ public class ChallengeServiceTest {
         // given
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "Foy", 3000);
         given(attemptRepository.save(any())).will(returnsFirstArg());
+        given(gameClient.sendAttempt(any())).willReturn(true);
 
         // when
         ChallengeAttempt resultAttempt = challengeService.verifyAttempt(attemptDTO);
@@ -54,6 +59,7 @@ public class ChallengeServiceTest {
         //check for saving attempts
         verify(userRepository).save(new User("Foy"));
         verify(attemptRepository).save(resultAttempt);
+        verify(gameClient).sendAttempt(resultAttempt);
     }
 
     @Test
@@ -61,6 +67,7 @@ public class ChallengeServiceTest {
         // given
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "Foy", 5000);
         given(attemptRepository.save(any())).will(returnsFirstArg());
+        given(gameClient.sendAttempt(any())).willReturn(true);
 
         //when
         ChallengeAttempt resultAttempt = challengeService.verifyAttempt(attemptDTO);
@@ -71,6 +78,7 @@ public class ChallengeServiceTest {
         //check for saving attempts
         verify(userRepository).save(new User("Foy"));
         verify(attemptRepository).save(resultAttempt);
+        verify(gameClient).sendAttempt(resultAttempt);
     }
 
     @Test
@@ -79,6 +87,7 @@ public class ChallengeServiceTest {
         given(userRepository.findByAlias("Foy")).willReturn(Optional.of(existingUser));
         given(attemptRepository.save(any())).will(returnsFirstArg());
         ChallengeAttemptDTO attemptDTO = new ChallengeAttemptDTO(50, 60, "Foy", 5000);
+        given(gameClient.sendAttempt(any())).willReturn(true);
 
         //when
         ChallengeAttempt resultAttempt = challengeService.verifyAttempt(attemptDTO);
@@ -90,7 +99,7 @@ public class ChallengeServiceTest {
         then(resultAttempt.getUser()).isEqualTo(existingUser);
         verify(userRepository, never()).save(any());
         verify(attemptRepository).save(resultAttempt);
-
+        verify(gameClient).sendAttempt(resultAttempt);
     }
 
     @Test
