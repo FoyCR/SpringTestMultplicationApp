@@ -1,4 +1,4 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.controllers;
 
 import microservices.foytest.multiplication.challenge.controllers.ChallengeController;
 import microservices.foytest.multiplication.challenge.domain.Challenge;

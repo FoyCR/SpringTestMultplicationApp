@@ -1,4 +1,4 @@
-package microservices.foytest.multiplication.challenge;
+package microservices.foytest.multiplication.challenge.services;
 
 import microservices.foytest.multiplication.challenge.data.ChallengeAttemptRepository;
 import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
