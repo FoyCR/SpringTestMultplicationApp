@@ -43,7 +43,7 @@ public class UserControllerTest {
 
         // when
         MockHttpServletResponse response = mvc.perform(
-                        get("/users/id=1,2"))
+                        get("/users/1,2"))
                 .andReturn().getResponse();
 
         // then
