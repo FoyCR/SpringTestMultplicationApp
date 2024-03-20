@@ -1,4 +1,4 @@
-package microservices.foytest.multiplication.user;
+package microservices.foytest.multiplication.user.data;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package microservices.foytest.multiplication;
+package microservices.foytest.multiplication.configuration;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.datatype.hibernate5.jakarta.Hibernate5JakartaModule;

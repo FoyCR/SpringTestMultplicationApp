@@ -4,7 +4,7 @@ import microservices.foytest.multiplication.challenge.controllers.ChallengeAttem
 import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
 import microservices.foytest.multiplication.challenge.dto.ChallengeAttemptDTO;
 import microservices.foytest.multiplication.challenge.services.ChallengeService;
-import microservices.foytest.multiplication.user.User;
+import microservices.foytest.multiplication.user.data.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
