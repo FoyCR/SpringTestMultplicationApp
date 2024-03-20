@@ -1,7 +1,7 @@
 package microservices.foytest.multiplication.challenge.domain;
 
 import lombok.*;
-import microservices.foytest.multiplication.user.data.User;
+import microservices.foytest.multiplication.user.domain.User;
 import jakarta.persistence.*;
 
 

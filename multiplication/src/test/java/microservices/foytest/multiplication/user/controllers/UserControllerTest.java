@@ -1,6 +1,6 @@
 package microservices.foytest.multiplication.user.controllers;
 
-import microservices.foytest.multiplication.user.data.User;
+import microservices.foytest.multiplication.user.domain.User;
 import microservices.foytest.multiplication.user.data.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

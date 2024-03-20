@@ -6,7 +6,7 @@ import microservices.foytest.multiplication.challenge.dto.ChallengeAttemptDTO;
 import microservices.foytest.multiplication.challenge.data.ChallengeAttemptRepository;
 import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
 import microservices.foytest.multiplication.clients.GamificationServiceClient;
-import microservices.foytest.multiplication.user.data.User;
+import microservices.foytest.multiplication.user.domain.User;
 import microservices.foytest.multiplication.user.data.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -66,5 +66,5 @@ public class ChallengeServiceImpl implements ChallengeService {
         boolean status = gameClient.sendAttempt(attempt);
         log.info("Gamification service response: {}", status);
     }
-    
+
 }
