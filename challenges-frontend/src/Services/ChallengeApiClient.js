@@ -3,6 +3,8 @@ class ChallengeApiClient {
     static GET_CHALLENGE = '/challenges/random'; //endpoint for GET randomly generated challenge
     static POST_ATTEMPT = '/attempts'; //endpoint for POST the attempt to solve a challenge
     static GET_ATTEMPTS_BY_ALIAS ='/attempts?alias='; // endpoint for GET the attempts for user's alias
+    static GET_USERS_BY_IDS = '/users'; // endpoint for GET the users for user's ids
+    
 
     static challenge(): Promise<Response> {
         return fetch(`${ChallengeApiClient.SERVER_URL}${ChallengeApiClient.GET_CHALLENGE}`); //fetching data from the REST API
@@ -26,6 +28,11 @@ class ChallengeApiClient {
 
     static getAttempts(userAlias: string): Promise<Response> {
         return fetch(`${ChallengeApiClient.SERVER_URL}${ChallengeApiClient.GET_ATTEMPTS_BY_ALIAS}${userAlias}`);
+    }
+
+
+    static getUsers(userIds: number[]): Promise<Response> {
+        return fetch(`${ChallengeApiClient.SERVER_URL}${ChallengeApiClient.GET_USERS_BY_IDS}/${userIds.join(',')}`);
     }
 }
 export default ChallengeApiClient;
