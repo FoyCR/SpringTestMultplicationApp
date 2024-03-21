@@ -32,6 +32,8 @@ class ChallengeApiClient {
 
 
     static getUsers(userIds: number[]): Promise<Response> {
+        let endpoint =`${ChallengeApiClient.SERVER_URL}${ChallengeApiClient.GET_USERS_BY_IDS}/${userIds.join(',')}`;
+        console.log(endpoint);
         return fetch(`${ChallengeApiClient.SERVER_URL}${ChallengeApiClient.GET_USERS_BY_IDS}/${userIds.join(',')}`);
     }
 }

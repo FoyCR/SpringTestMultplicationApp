@@ -13,12 +13,12 @@ class LeaderBoardComponent extends React.Component {
 
     componentDidMount() {
         this.refreshLeaderBoard();
-        setInterval(this.refreshLeaderBoard(this), 10000);
+        setInterval(this.refreshLeaderBoard.bind(this), 10000);
     }
 
     // Query the Game Api to get the leader board data
-    getLeaderBoard() {
-        GameApiClient.leaderBoard().then(
+    getLeaderBoardData(): Promise {
+        return GameApiClient.leaderBoard().then(
             res => {
                 if (res.ok) {
                  return res.json();
