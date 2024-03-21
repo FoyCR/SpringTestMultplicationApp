@@ -53,8 +53,11 @@ public class GameServiceImpl implements GameService {
 
         // Gets the total score and existing badges for that user
         List<ScoreCard> scoreCardList = scoreRepository.findByUserIdOrderByScoreTimestampDesc(successfulAttempt.getUserId());
+        log.info("Score cards for user {}: {}", successfulAttempt.getUserId(), scoreCardList.size());
+
         Set<BadgeType> alreadyGotBadges = badgeRepository.findByUserIdOrderByBadgeTimestampDesc(successfulAttempt.getUserId())
                 .stream().map(BadgeCard::getBadgeType).collect(Collectors.toSet());
+        log.info("User {} already got {} badges", successfulAttempt.getUserId(), alreadyGotBadges.size());
 
         //call the badges processors for badges that the user does not have yet
         List<BadgeCard> newBadgeCards = badgeProcessors.stream()
