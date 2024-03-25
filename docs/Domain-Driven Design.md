@@ -109,3 +109,11 @@ In the new _Gamification_ domain we will add the following entities:
 - **Leaderboard Position**: with a relation 1 to 1 with user.
 - **Badge Card**: with a relation N to one with user (an User can have "n" badges)
 - **Score Card**: with a relation 1 to N with user (an User can have "n" score cards) and with a relation 1 to 1 with attempt.
+
+### User story 4
+
+With this user story we are moving from tightly couple microservices to loosely couple microservices through the implementation of an Event-Driven Architecture using **RabbitMQ** as message broker.
+
+### Design considerations
+
+We are going to refactor our code to use a message broker to send the attempts to the gamification microservice instead of a REST API call. We will create an attempt _exchange_, of type **Topic**. The Multiplication microservice ows this exchange, it will be use two binding (routing) keys _attempt.correct_ and _attempt.failed_. On the other hand the Gamification microservice will declare a _queue_ with a _bind key_ that suits its requirements. In this case, this routing key is used as a filter to receive and process only correct attempts _attempt.correct_. If in the future we are interested in all the attempts (correct and failed) for instance for a new microservice of reporting, that microservice could create a new _queue_ and uses a binding key _attempt.\*_ (or _.#_) to consume both correct and wrong attempts.
