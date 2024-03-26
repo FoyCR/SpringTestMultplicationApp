@@ -3,10 +3,10 @@ package microservices.foytest.multiplication.challenge.dto;
 import lombok.Value;
 
 /**
- * Used as contract between the gamification service and the challenge service.
+ * Used as message when an attempt was verified.
  */
 @Value
-public class VerifiedAttemptDTO {
+public class AttemptVerifiedEvent {
     long attemptId;
     boolean correct;
     int factorA;
