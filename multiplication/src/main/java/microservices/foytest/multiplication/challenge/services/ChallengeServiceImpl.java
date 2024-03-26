@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import microservices.foytest.multiplication.challenge.dto.ChallengeAttemptDTO;
 import microservices.foytest.multiplication.challenge.data.ChallengeAttemptRepository;
 import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
-import microservices.foytest.multiplication.clients.GamificationServiceClient;
+import microservices.foytest.multiplication.challenge.publishers.AttemptEventPublisher;
 import microservices.foytest.multiplication.user.domain.User;
 import microservices.foytest.multiplication.user.data.UserRepository;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,8 @@ import java.util.List;
 public class ChallengeServiceImpl implements ChallengeService {
     private final UserRepository userRepository;
     private final ChallengeAttemptRepository attemptRepository;
-    private final GamificationServiceClient gameClient;
+    //private final GamificationServiceClient gameClient; //replace by the AttemptEventPublisher
+    private final AttemptEventPublisher attemptEventPublisher;
 
     @Override
     public ChallengeAttempt verifyAttempt(ChallengeAttemptDTO attemptDTO) {
@@ -31,8 +32,8 @@ public class ChallengeServiceImpl implements ChallengeService {
         //save the attempt
         ChallengeAttempt storedAttempt = saveAttempt(user, attemptDTO, isCorrect);
 
-        //send the attempt to the gamification service
-        sendAttemptToGameService(storedAttempt);
+        //publish the attempt to RabbitMQ
+        publishAttemptEvent(storedAttempt);
 
         return storedAttempt;
     }
@@ -62,9 +63,10 @@ public class ChallengeServiceImpl implements ChallengeService {
         return attemptRepository.save(attempt);
     }
 
-    private void sendAttemptToGameService(ChallengeAttempt attempt) {
-        boolean status = gameClient.sendAttempt(attempt);
-        log.info("Gamification service response: {}", status);
+    private void publishAttemptEvent(ChallengeAttempt attempt) {
+        //boolean status = gameClient.sendAttempt(attempt); // old implementation using synchronous REST API call
+        attemptEventPublisher.AttemptVerified(attempt); //new implementation using asynchronous messaging
+        log.info("Message sent to RabbitMQ");
     }
 
 }
