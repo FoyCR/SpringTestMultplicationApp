@@ -1,6 +1,6 @@
 package microservices.foy.gamification.controllers;
 
-import microservices.foy.gamification.challenge.dto.VerifiedAttemptDTO;
+import microservices.foy.gamification.challenge.dto.AttemptVerifiedEvent;
 import microservices.foy.gamification.game.controllers.GameController;
 import microservices.foy.gamification.game.services.GameService;
 import org.junit.jupiter.api.Test;
@@ -34,12 +34,12 @@ public class GameControllerTests {
     private GameService gameService;
 
     @Autowired
-    private JacksonTester<VerifiedAttemptDTO> jsonAttemptRequest;
+    private JacksonTester<AttemptVerifiedEvent> jsonAttemptRequest;
 
     @Test
     public void PostValidAttempt() throws Exception {
         //Given
-        VerifiedAttemptDTO attempt = new VerifiedAttemptDTO(1L, true, 60, 40, 1L, "Foy");
+        AttemptVerifiedEvent attempt = new AttemptVerifiedEvent(1L, true, 60, 40, 1L, "Foy");
         given(gameService.newAttemptForUser(attempt)).willReturn(new GameService.GameResult(10, List.of()));
 
         //When
@@ -57,7 +57,7 @@ public class GameControllerTests {
     @Test
     public void PostInvalidAttempt() throws Exception {
         //Given
-        VerifiedAttemptDTO attempt = new VerifiedAttemptDTO(1L, true, 1, 100, 1L, "");
+        AttemptVerifiedEvent attempt = new AttemptVerifiedEvent(1L, true, 1, 100, 1L, "");
 
         //When
         MockHttpServletResponse response = mvc.perform(

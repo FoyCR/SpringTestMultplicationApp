@@ -1,6 +1,6 @@
 package microservices.foy.gamification.game.processors;
 
-import microservices.foy.gamification.challenge.dto.VerifiedAttemptDTO;
+import microservices.foy.gamification.challenge.dto.AttemptVerifiedEvent;
 import microservices.foy.gamification.game.domain.BadgeType;
 import microservices.foy.gamification.game.domain.ScoreCard;
 
@@ -16,7 +16,7 @@ public interface BadgeProcessor {
      * @param attempt      current verified attempt
      * @return a BadgeType if the user is entitled to this badge, otherwise empty
      */
-    Optional<BadgeType> processForOptionalBadge(int currentScore, List<ScoreCard> scoreCards, VerifiedAttemptDTO attempt);
+    Optional<BadgeType> processForOptionalBadge(int currentScore, List<ScoreCard> scoreCards, AttemptVerifiedEvent attempt);
 
     /**
      * @return the BadgeType object that this processor is handling. Can be used to filter processor according the needs

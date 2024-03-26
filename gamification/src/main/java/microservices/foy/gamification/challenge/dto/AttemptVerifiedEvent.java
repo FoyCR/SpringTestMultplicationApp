@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
 @Value
-public class VerifiedAttemptDTO {
+public class AttemptVerifiedEvent {
     long attemptId;
     boolean correct;
     @Min(10) @Max(99)

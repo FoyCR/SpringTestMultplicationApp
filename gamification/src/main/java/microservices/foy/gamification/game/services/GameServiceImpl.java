@@ -2,7 +2,7 @@ package microservices.foy.gamification.game.services;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import microservices.foy.gamification.challenge.dto.VerifiedAttemptDTO;
+import microservices.foy.gamification.challenge.dto.AttemptVerifiedEvent;
 import microservices.foy.gamification.game.data.BadgeRepository;
 import microservices.foy.gamification.game.data.ScoreRepository;
 import microservices.foy.gamification.game.domain.BadgeCard;
@@ -25,7 +25,7 @@ public class GameServiceImpl implements GameService {
 
 
     @Override
-    public GameResult newAttemptForUser(VerifiedAttemptDTO attempt) {
+    public GameResult newAttemptForUser(AttemptVerifiedEvent attempt) {
         if (attempt.isCorrect()) {
             ScoreCard scoreCard = new ScoreCard(attempt.getUserId(), attempt.getAttemptId()); //score default 10 pints
             scoreRepository.save(scoreCard); // save to database only ids and score
@@ -46,7 +46,7 @@ public class GameServiceImpl implements GameService {
      * @param successfulAttempt successful attempt to check
      * @return List of Badges obtained
      */
-    private List<BadgeCard> processForBadges(final VerifiedAttemptDTO successfulAttempt) {
+    private List<BadgeCard> processForBadges(final AttemptVerifiedEvent successfulAttempt) {
         Optional<Integer> optTotalScore = scoreRepository.getTotalScoreForUser(successfulAttempt.getUserId());
         if (optTotalScore.isEmpty()) return Collections.emptyList();
         int totalScore = optTotalScore.get();

@@ -1,7 +1,7 @@
 package microservices.foy.gamification.game.processors;
 
 import lombok.extern.slf4j.Slf4j;
-import microservices.foy.gamification.challenge.dto.VerifiedAttemptDTO;
+import microservices.foy.gamification.challenge.dto.AttemptVerifiedEvent;
 import microservices.foy.gamification.game.domain.BadgeType;
 import microservices.foy.gamification.game.domain.ScoreCard;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class FirstRightBadgeProcessor implements BadgeProcessor {
 
     @Override
-    public Optional<BadgeType> processForOptionalBadge(int currentScore, List<ScoreCard> scoreCards, VerifiedAttemptDTO attempt) {
+    public Optional<BadgeType> processForOptionalBadge(int currentScore, List<ScoreCard> scoreCards, AttemptVerifiedEvent attempt) {
         log.info("First Right Badge Processor, number of current score cards: {}", scoreCards.size());
         return scoreCards.size() == 1 ? Optional.of(BadgeType.FIRST_RIGHT) : Optional.empty();
     }

@@ -1,6 +1,6 @@
 package microservices.foy.gamification.services;
 
-import microservices.foy.gamification.challenge.dto.VerifiedAttemptDTO;
+import microservices.foy.gamification.challenge.dto.AttemptVerifiedEvent;
 import microservices.foy.gamification.game.data.ScoreRepository;
 import microservices.foy.gamification.game.data.BadgeRepository;
 import microservices.foy.gamification.game.domain.BadgeCard;
@@ -44,7 +44,7 @@ public class GameServiceTest {
     public void HandleSuccessfulAttempt() {
         //given
         long userId = 1L, attemptId = 1L;
-        VerifiedAttemptDTO attemptDTO = new VerifiedAttemptDTO(attemptId, true, 50, 30, userId, "Foy");
+        AttemptVerifiedEvent attemptDTO = new AttemptVerifiedEvent(attemptId, true, 50, 30, userId, "Foy");
         ScoreCard scoreCard = new ScoreCard(userId, attemptId);
 
         GameService.GameResult expectedResult = new GameService.GameResult(10, List.of((BadgeType.LUCKY_NUMBER)));
@@ -67,7 +67,7 @@ public class GameServiceTest {
     @Test
     public void HandleFailedAttempt() {
         //given
-        VerifiedAttemptDTO attemptDTO = new VerifiedAttemptDTO(1L, false, 50, 30, 1L, "Foy");
+        AttemptVerifiedEvent attemptDTO = new AttemptVerifiedEvent(1L, false, 50, 30, 1L, "Foy");
         GameService.GameResult expectedResult = new GameService.GameResult(0, List.of());
 
         // when

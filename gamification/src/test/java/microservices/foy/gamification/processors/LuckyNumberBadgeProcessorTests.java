@@ -1,6 +1,6 @@
 package microservices.foy.gamification.processors;
 
-import microservices.foy.gamification.challenge.dto.VerifiedAttemptDTO;
+import microservices.foy.gamification.challenge.dto.AttemptVerifiedEvent;
 import microservices.foy.gamification.game.domain.BadgeType;
 import microservices.foy.gamification.game.processors.LuckyNumberBadgeProcessor;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,28 +22,28 @@ public class LuckyNumberBadgeProcessorTests {
     @Test
     public void shouldReturnBadgeIfFactorAIsTheNumber() {
         Optional<BadgeType> badgeType = processor.processForOptionalBadge(10, List.of(),
-                new VerifiedAttemptDTO(1L, true, 69, 10, 1L, "Foy"));
+                new AttemptVerifiedEvent(1L, true, 69, 10, 1L, "Foy"));
         assertThat(badgeType).contains(BadgeType.LUCKY_NUMBER);
     }
 
     @Test
     public void shouldReturnBadgeIfFactorBIsTheNumber() {
         Optional<BadgeType> badgeType = processor.processForOptionalBadge(10, List.of(),
-                new VerifiedAttemptDTO(1L, true, 10, 69, 1L, "Foy"));
+                new AttemptVerifiedEvent(1L, true, 10, 69, 1L, "Foy"));
         assertThat(badgeType).contains(BadgeType.LUCKY_NUMBER);
     }
 
     @Test
     public void shouldReturnBadgeIfBothFactorsAreTheNumber() {
         Optional<BadgeType> badgeType = processor.processForOptionalBadge(10, List.of(),
-                new VerifiedAttemptDTO(1L, true, 69, 69, 1L, "Foy"));
+                new AttemptVerifiedEvent(1L, true, 69, 69, 1L, "Foy"));
         assertThat(badgeType).contains(BadgeType.LUCKY_NUMBER);
     }
 
     @Test
     public void shoulNotdReturnBadgeIfNoneFactorsAreTheNumber() {
         Optional<BadgeType> badgeType = processor.processForOptionalBadge(10, List.of(),
-                new VerifiedAttemptDTO(1L, true, 10, 10, 1L, "Foy"));
+                new AttemptVerifiedEvent(1L, true, 10, 10, 1L, "Foy"));
         assertThat(badgeType).isEmpty();
     }
 }
