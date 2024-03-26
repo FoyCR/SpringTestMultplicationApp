@@ -2,7 +2,8 @@ package microservices.foytest.multiplication.clients;
 
 import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
 
-import microservices.foytest.multiplication.challenge.dto.VerifiedAttemptDTO;
+import microservices.foytest.multiplication.challenge.dto.AttemptVerifiedEvent;
+//import microservices.foytest.multiplication.challenge.dto.VerifiedAttemptDTO;
 import microservices.foytest.multiplication.user.domain.User;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -43,7 +44,7 @@ public class GamificationServiceClientTest {
     void testSendAttemptSuccessful() {
         // given
         ResponseEntity<String> mockResponse = new ResponseEntity<>("Success", HttpStatus.OK);
-        given(restTemplate.postForEntity(any(String.class), any(VerifiedAttemptDTO.class), eq(String.class)))
+        given(restTemplate.postForEntity(any(String.class), any(AttemptVerifiedEvent.class), eq(String.class)))
                 .willReturn(mockResponse);
 
         // when
@@ -58,7 +59,7 @@ public class GamificationServiceClientTest {
 
         // given
         ResponseEntity<String> mockResponse = new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
-        given(restTemplate.postForEntity(any(String.class), any(VerifiedAttemptDTO.class), eq(String.class)))
+        given(restTemplate.postForEntity(any(String.class), any(AttemptVerifiedEvent.class), eq(String.class)))
                 .willReturn(mockResponse);
 
         // when
@@ -72,7 +73,7 @@ public class GamificationServiceClientTest {
     void testSendAttemptException() {
         //given
         // this simulates an error in the RestTemplate.postForEntity method
-        given(restTemplate.postForEntity(any(String.class), any(VerifiedAttemptDTO.class), eq(String.class)))
+        given(restTemplate.postForEntity(any(String.class), any(AttemptVerifiedEvent.class), eq(String.class)))
                 .willThrow(new RuntimeException("Test Error occurred"));
 
         // When

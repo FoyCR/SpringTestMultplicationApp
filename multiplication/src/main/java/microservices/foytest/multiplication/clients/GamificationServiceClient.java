@@ -2,7 +2,9 @@ package microservices.foytest.multiplication.clients;
 
 import lombok.extern.slf4j.Slf4j;
 import microservices.foytest.multiplication.challenge.domain.ChallengeAttempt;
-import microservices.foytest.multiplication.challenge.dto.VerifiedAttemptDTO;
+import microservices.foytest.multiplication.challenge.dto.AttemptVerifiedEvent;
+//import microservices.foytest.multiplication.challenge.dto.VerifiedAttemptDTO;
+
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class GamificationServiceClient {
 
     public boolean sendAttempt(final ChallengeAttempt attempt) {
         try { //using try catch to avoid the application to stop if the gamification service is not available
-            VerifiedAttemptDTO dto = new VerifiedAttemptDTO(attempt.getId(), attempt.isCorrect(),
+            AttemptVerifiedEvent dto = new AttemptVerifiedEvent(attempt.getId(), attempt.isCorrect(),
                     attempt.getFactorA(), attempt.getFactorB(), attempt.getUser().getId(), attempt.getUser().getAlias());
             ResponseEntity<String> response = restTemplate.postForEntity(gamificationServiceUrl + "/attempts", dto, String.class);
             log.info("Gamification service response: {}", response.getStatusCode());
