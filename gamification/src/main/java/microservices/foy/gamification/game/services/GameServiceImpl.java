@@ -20,16 +20,14 @@ import java.util.stream.Collectors;
 public class GameServiceImpl implements GameService {
     private final ScoreRepository scoreRepository;
     private final BadgeRepository badgeRepository;
-    //Spring will injects all the @Component beans in this list
+    //Spring will inject all the @Component beans in this list
     private final List<BadgeProcessor> badgeProcessors;
-
 
     @Override
     public GameResult newAttemptForUser(AttemptVerifiedEvent attempt) {
         if (attempt.isCorrect()) {
-            ScoreCard scoreCard = new ScoreCard(attempt.getUserId(), attempt.getAttemptId()); //score default 10 pints
-            scoreRepository.save(scoreCard); // save to database only ids and score
-            log.info("User {} score {} points for attempt id {}", attempt.getUserId(), scoreCard.getScore(), attempt.getAttemptId());
+            ScoreCard scoreCard = saveScoreCard(attempt);
+
             List<BadgeCard> badgeCards = processForBadges(attempt);
 
             return new GameResult(scoreCard.getScore(), badgeCards.stream()
@@ -70,4 +68,12 @@ public class GameServiceImpl implements GameService {
         badgeRepository.saveAll(newBadgeCards); //save new badgeCards in the database
         return newBadgeCards;
     }
+
+    private ScoreCard saveScoreCard(AttemptVerifiedEvent attempt) {
+        ScoreCard scoreCard = new ScoreCard(attempt.getUserId(), attempt.getAttemptId()); //score default 10 pints
+        scoreRepository.save(scoreCard); // save to database only ids and score
+        log.info("User {} score {} points for attempt id {}", attempt.getUserId(), scoreCard.getScore(), attempt.getAttemptId());
+        return scoreCard;
+    }
+
 }
