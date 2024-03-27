@@ -1,5 +1,6 @@
 package microservices.foy.gamification.game.services;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import microservices.foy.gamification.challenge.dto.AttemptVerifiedEvent;
@@ -24,6 +25,7 @@ public class GameServiceImpl implements GameService {
     private final List<BadgeProcessor> badgeProcessors;
 
     @Override
+    @Transactional
     public GameResult newAttemptForUser(AttemptVerifiedEvent attempt) {
         if (attempt.isCorrect()) {
             ScoreCard scoreCard = saveScoreCard(attempt);
