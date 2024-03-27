@@ -63,7 +63,7 @@ public class GameServiceImpl implements GameService {
                 .map(bp -> bp.processForOptionalBadge(totalScore, scoreCardList, successfulAttempt))
                 .flatMap(Optional::stream)
                 .map(badgeType -> new BadgeCard(successfulAttempt.getUserId(), badgeType))
-                .collect(Collectors.toList());
+                .toList();
 
         badgeRepository.saveAll(newBadgeCards); //save new badgeCards in the database
         return newBadgeCards;
