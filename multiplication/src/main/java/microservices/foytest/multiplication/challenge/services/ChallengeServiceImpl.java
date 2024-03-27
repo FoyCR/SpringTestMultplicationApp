@@ -1,5 +1,6 @@
 package microservices.foytest.multiplication.challenge.services;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import microservices.foytest.multiplication.challenge.dto.ChallengeAttemptDTO;
@@ -22,6 +23,7 @@ public class ChallengeServiceImpl implements ChallengeService {
     private final AttemptEventPublisher attemptEventPublisher;
 
     @Override
+    @Transactional
     public ChallengeAttempt verifyAttempt(ChallengeAttemptDTO attemptDTO) {
         //Check if the User already exist for that alias, otherwise create it
         User user = getOrCreateUser(attemptDTO.getUserAlias());
