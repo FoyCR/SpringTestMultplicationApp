@@ -9,6 +9,12 @@
 ```
 ./mvnw spring-boot:run
 ```
+or 
+if you want to run another instance of the same microservice but in another port:
+
+```
+./mvnw spring-boot:run -D"spring-boot.run.arguments"="--server.port=9080"
+```
 
 ### To run all the tests:
 
