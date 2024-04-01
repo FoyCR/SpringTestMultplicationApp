@@ -1,5 +1,5 @@
 class ChallengeApiClient {
-    static SERVER_URL = 'http://localhost:8080'; //base URL for the endpoints
+    static SERVER_URL = 'http://localhost:8000'; //base URL for the endpoints
     static GET_CHALLENGE = '/challenges/random'; //endpoint for GET randomly generated challenge
     static POST_ATTEMPT = '/attempts'; //endpoint for POST the attempt to solve a challenge
     static GET_ATTEMPTS_BY_ALIAS ='/attempts?alias='; // endpoint for GET the attempts for user's alias
