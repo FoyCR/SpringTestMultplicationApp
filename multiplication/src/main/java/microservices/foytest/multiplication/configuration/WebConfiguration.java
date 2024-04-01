@@ -1,4 +1,5 @@
-package microservices.foytest.multiplication.configuration;
+// No longer needed because this microservice will be behind the gateway microservice.
+/*package microservices.foytest.multiplication.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -11,3 +12,4 @@ public class WebConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**").allowedOrigins("http://localhost:3000");
     }
 }
+*/
