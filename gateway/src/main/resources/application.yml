@@ -1,15 +1,28 @@
 server:
   port: 8000
 spring:
+  application:
+    name: gateway
   cloud:
+    consul:
+      discovery:
+        healthCheckInterval: 15s
+        hostname: 192.168.7.2
+    loadbalancer:
+      ribbon: #Netflx impl on maintenance was excluded in the dependencies (pom)
+        enabled:false  # was added for readability
+      consul:
+        enabled: true
+        discovery:
+          query-passing: true # get only services that are passing health check
     gateway:
       routes:
         - id: multiplication
-          uri: http://localhost:8080/
+          uri: lb://multiplication/  # lb means Load Balancer. Before consul http://localhost:8080/
           predicates:
             - Path=/challenges/**,/attempts,/attempts/**,/users/**
         - id: gamification
-          uri: http://localhost:8081/
+          uri: lb://gamification/ # lb means Load Balancer. Before consul http://localhost:8081/
           predicates:
             - Path=/leaders
       globalcors:
@@ -22,6 +35,10 @@ spring:
               - "POST"
               - "OPTIONS"
       default-filters:
+        - name: Retry
+          args:
+            retries: 3
+            methods: GET, POST
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
 
 logging:
