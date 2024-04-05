@@ -4,7 +4,26 @@
 
 #### (Run in the terminal)
 
-### To run the application:
+### To run the docker container of Consul (the discovery Service)
+
+Run: 
+
+```
+docker run -it --rm -p 8500:8500 -p 8600:8600/udp --name=consulServer -v '{local path}:/consul/data' hashicorp/consul agent -server -ui -node=server-1 -bootstrap-expect=1 -client='0.0.0.0' -data-dir=/consul/data
+```
+The Consul management interface can be accessed at: http://localhost:8500/ui
+
+### To run the docker container of RabbitMQ (the messaging Service)
+
+```
+docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management
+```
+
+The RabbitMQ management interface can be accessed at: http://localhost:15672/ with the default credentials username:guest and password:guest
+
+### To run the microservices:
+
+In the folder corresponding to each microservice run:
 
 ```
 ./mvnw spring-boot:run
