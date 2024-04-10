@@ -1,0 +1,30 @@
+<configuration>
+    <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>localhost:5000</destination>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <mdc/>
+                <context/>
+                <version/>
+                <logLevel/>
+                <loggerName/>
+                <message/>
+                <pattern>
+                    <pattern>
+                        {
+                        "appName": "multiplication",
+                        "servicePort": "${SERVICE_PORT}"
+                        }
+                    </pattern>
+                </pattern>
+                <threadName/>
+                <callerData/>
+                <stackTrace/>
+            </providers>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STASH"/>
+    </root>
+</configuration>
