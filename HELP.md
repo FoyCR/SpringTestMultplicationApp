@@ -77,6 +77,11 @@ use the following as JDBC URL
 jdbc:h2:mem:testdb
 ```
 
+### To run locally ELK stack locally using docker container
+
+Refer to https://foyland.blogspot.com/2024/04/logstash-elastic-search-y-kibana-en.html
+Required for centralized logging
+
 ## Reference Documentation
 
 For further reference, please consider the following sections:
